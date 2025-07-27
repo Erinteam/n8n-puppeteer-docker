@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-ARG N8N_VERSION
+ARG N8N_VERSION=1.41.0
 
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi
 
@@ -46,6 +46,7 @@ ENV NODE_ICU_DATA /usr/local/lib/node_modules/full-icu
 
 WORKDIR /data
 
+RUN chmod +x /docker-entrypoint.sh
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
 
